@@ -1,0 +1,1 @@
+export { default as SearchViewAllMusic} from './search-view-all-music.component' 

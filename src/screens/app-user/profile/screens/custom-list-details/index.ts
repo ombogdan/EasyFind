@@ -1,0 +1,1 @@
+export {default as CustomListDetails} from './custom-list-details.component'

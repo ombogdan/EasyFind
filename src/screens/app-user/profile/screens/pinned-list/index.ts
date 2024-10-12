@@ -1,0 +1,1 @@
+export {default as PinnedList} from './pinned-list.component'

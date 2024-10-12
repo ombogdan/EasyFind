@@ -1,0 +1,1 @@
+export {default as SearchEmpty} from './search-empty.component'
