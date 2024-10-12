@@ -4,7 +4,7 @@ import { store } from "store/index";
 import { asyncStorageService } from "../async-storage-service";
 
 const TOKEN_TYPE = "Bearer";
-const BASE_URL = "https://opusapp.xyz";
+const BASE_URL = "https://easyFind.xyz";
 
 export const apiInstance = axios.create({
   baseURL: BASE_URL

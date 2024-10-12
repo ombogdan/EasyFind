@@ -1,1 +1,0 @@
-export {default as PublicProfile} from './public-profile.component'

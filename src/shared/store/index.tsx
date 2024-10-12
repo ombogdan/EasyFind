@@ -10,7 +10,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['app-user', 'user', 'device'],
+  whitelist: ['user'],
 };
 
 const middlewares = [thunk];

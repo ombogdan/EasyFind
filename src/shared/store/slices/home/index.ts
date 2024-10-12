@@ -6,8 +6,7 @@ import { reducers } from './recurers';
 
 const initialState: HomeState = {
   loading: LoadingType.FETCH,
-  popular: [],
-  releases: [],
+  storeMarkers: [],
 };
 
 const homeSlice = createSlice({
@@ -21,7 +20,3 @@ export const homeReducer = homeSlice.reducer;
 
 export const homeLoadingSelector = (state: RootState) =>
   state.home.loading === LoadingType.FETCH;
-
-export const homePopularSelector = (state: RootState) => state.home.popular;
-
-export const homeReleasesSelector = (state: RootState) => state.home.releases;

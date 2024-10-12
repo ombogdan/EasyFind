@@ -9,16 +9,10 @@ export const reducers = {
   ): void {
     state.loading = action.payload;
   },
-  setPopular(
+  setMarkers(
     state: HomeState,
     action: PayloadAction<SpotifyEntity[]>,
   ): void {
-    state.popular = action.payload;
-  },
-  setReleases(
-    state: HomeState,
-    action: PayloadAction<SpotifyEntity[]>,
-  ): void {
-    state.releases = action.payload;
+    state.storeMarkers = action.payload;
   },
 };

@@ -1,7 +1,6 @@
-import { LoadingType, SpotifyEntity } from 'shared/types';
+import { LoadingType, } from 'shared/types';
 
 export interface HomeState {
   loading: LoadingType;
-  popular: SpotifyEntity[];
-  releases: SpotifyEntity[];
+  storeMarkers: any[];
 }

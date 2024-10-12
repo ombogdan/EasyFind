@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { useTypedSelector } from "shared/store";
 
-import BootSplash from "react-native-bootsplash";
 import { selectIsUserAuthedStatus } from "store/selectors/user";
 import { navigationRef } from "./root-navigator.config";
 import { AuthNavigator } from "./auth/auth.navigator";
@@ -13,7 +12,7 @@ export const RootNavigator = () => {
   const isUserAuthed = useTypedSelector(selectIsUserAuthedStatus);
 
   return (
-    <NavigationContainer onReady={() => BootSplash.hide({ fade: true })} ref={navigationRef}>
+    <NavigationContainer ref={navigationRef}>
       {!isUserAuthed ? (
         <AuthNavigator />
       ) : (

@@ -13,8 +13,6 @@ import {
 import Toast from 'react-native-toast-message';
 import createToastConfig from 'shared/core/toast-config';
 import { Platform, UIManager } from 'react-native';
-// import { LogBox } from 'react-native';
-// LogBox.ignoreAllLogs();
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {

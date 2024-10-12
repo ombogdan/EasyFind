@@ -25,7 +25,6 @@ export const APP_ICONS = Object.freeze({
   'starFull': require('shared/assets/icons/starFull.png'),
   'starHalf': require('shared/assets/icons/starHalf.png'),
   'emptyStar': require('shared/assets/icons/emptyStar.png'),
-  'addToList': require('shared/assets/icons/addToList.png'),
   'share': require('shared/assets/icons/share.png'),
   'comment': require('shared/assets/icons/comment.png'),
   'likeFinger': require('shared/assets/icons/likeFinger.png'),
