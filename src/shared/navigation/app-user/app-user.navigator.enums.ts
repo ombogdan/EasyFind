@@ -3,4 +3,5 @@ export enum AppUserRoutes {
   Search = 'Search',
   Activity = 'Activity',
   Profile = 'Profile',
+  HomeTabNavigation = 'HomeTabNavigation',
 }

@@ -48,5 +48,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSUserTrackingUsageDescription</key>
+    <string>Permission to collect information about the application's operation is necessary to correct errors in the application, improve functionality. The information is not stored and is not transferred to third parties.</string>
 </dict>
 </plist>

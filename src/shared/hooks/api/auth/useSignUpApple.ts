@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux';
 import { loginByApple, getMe } from 'shared/core/services/api/auth/auth';
 import { asyncStorageService } from 'shared/core/services/async-storage-service';
 import { userActions } from 'shared/store/slices/user';
-import { LoadingType } from 'shared/types';
 
 const useSignUpApple = () => {
-  const [loading, setLoading] = useState(LoadingType.COMPLETE);
+  const [loading, setLoading] = useState('COMPLETE');
   const dispatch = useDispatch();
 
   const handleSignUpUser = async (authorizationCode: string) => {
@@ -24,7 +23,7 @@ const useSignUpApple = () => {
   };
 
   const handleSignUpApple = async () => {
-    setLoading(LoadingType.FETCH);
+    setLoading('FETCH');
     try {
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
@@ -40,7 +39,7 @@ const useSignUpApple = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(LoadingType.COMPLETE);
+      setLoading('COMPLETE');
     }
   };
 

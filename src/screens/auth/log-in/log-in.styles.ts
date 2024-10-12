@@ -7,14 +7,12 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
       marginTop: scale(16)
     },
     loginDetails: {
-      fontFamily: "TT Hoves Pro Trial",
       fontSize: scale(32),
       fontWeight: "600",
       lineHeight: scale(40),
       color: theme.palette.dark
     },
     forgotPassword: {
-      fontFamily: "SF-Pro-Display-Semibold",
       fontSize: scale(14),
       fontWeight: "500",
       color: theme.palette.orange

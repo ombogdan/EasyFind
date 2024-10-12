@@ -13,18 +13,12 @@ const persistConfig = {
   whitelist: ['user'],
 };
 
-const middlewares = [thunk];
-if (__DEV__) {
-  const createFlipperMiddleware = require('redux-flipper').default;
-  middlewares.push(createFlipperMiddleware());
-}
-
-export const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  middleware: middlewares,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
 const persistor = persistStore(store);

@@ -20,7 +20,6 @@ export const useStyles = createStyles(({ scale, theme, disabled, title }: any) =
       width: scale(60)
     },
     btnText: {
-      fontFamily: "SF-Pro-Display-Semibold",
       fontSize: scale(16),
       fontWeight: "500",
     },

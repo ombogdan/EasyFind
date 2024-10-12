@@ -15,6 +15,7 @@
       "theme/*": ["shared/theme/*"],
       "enums/*": ["shared/enums/*"],
       "hooks/*": ["shared/hooks/*"],
+      "api/*": ["shared/hooks/api"],
       "store/*": ["shared/store/*"],
       "ui-kit/*": ["shared/ui-kit/*"],
       "utils/*": ["shared/utils/*"],

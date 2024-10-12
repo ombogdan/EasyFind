@@ -2,6 +2,9 @@ module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     ["react-native-reanimated/plugin"],
+    ['@babel/plugin-transform-class-properties', { loose: true }],
+    ['@babel/plugin-transform-private-methods', { loose: true }],
+    ['@babel/plugin-transform-private-property-in-object', { loose: true }],
     [
       'module-resolver',
       {
@@ -29,6 +32,7 @@ module.exports = {
           theme: './src/shared/theme',
           enums: './src/shared/enums',
           hooks: './src/shared/hooks',
+          api: './src/shared/hooks/api',
           store: './src/shared/store',
           'ui-kit': './src/shared/ui-kit',
           utils: './src/shared/utils',

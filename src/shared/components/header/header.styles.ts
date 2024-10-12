@@ -17,7 +17,6 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
       paddingHorizontal: scale(16)
     },
     nameText: {
-      fontFamily: "SF-Pro-Display-Semibold",
       fontSize: scale(16),
       fontWeight: "500",
       color: theme.palette.dark,

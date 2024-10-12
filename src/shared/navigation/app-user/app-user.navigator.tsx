@@ -32,14 +32,7 @@ export const AppUserNavigator = () => {
   const user = useTypedSelector(selectUserMe);
 
   return (
-    <Stack.Navigator
-      initialRouteName={
-        user?.username
-          ? AppUserRoutes.HomeTabNavigation
-          : AppUserRoutes.EnterYourNickname
-      }
-      screenOptions={{ headerShown: false }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name={AppUserRoutes.HomeTabNavigation}
         component={MainTabNavigator}
