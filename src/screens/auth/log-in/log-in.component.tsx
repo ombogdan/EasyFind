@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
-import CustomInput from "ui-kit/custom-input/custom-input.component";
+import { Image, SafeAreaView, View } from "react-native";
 import { Box } from "ui-kit/box";
 import { CustomButton } from "ui-kit/custom-button";
-import { BUTTON_VARIANTS, emailRegexp, LOGO_ICON } from "constants/index";
-import { navigate } from "shared/navigation/root-navigator.config";
-import { AuthRoutes } from "shared/navigation/auth";
+import { BUTTON_VARIANTS, LOGO_ICON } from "constants/index";
 import { getMe, loginByGoogle } from "services/api/auth/auth";
 import { asyncStorageService } from "services/async-storage-service";
 import { userActions } from "store/slices/user";
@@ -14,18 +11,15 @@ import { useTypedDispatch } from "store/index";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
 import useSignUpApple from "shared/hooks/api/auth/useSignUpApple";
+import { useTranslation } from 'react-i18next';
 import { useStyles } from "./log-in.styles";
+
 
 const LogIn = () => {
   const styles = useStyles();
   const dispatch = useTypedDispatch();
   const { handleSignUpApple, loading: isLoadingApple } = useSignUpApple();
-
-  const [email, setEmail] = useState("");
-  const [emailErrorMessage, setEmailErrorMessage] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -36,37 +30,6 @@ const LogIn = () => {
     });
   }, []);
 
-  const handleLogin = async () => {
-    if (!password || !email) {
-      if (!password) {
-        setPasswordErrorMessage("Please enter your password");
-      }
-      if (!email) {
-        setEmailErrorMessage("Please enter your email");
-      }
-      return;
-    }
-    if (!emailRegexp.test(email)) {
-      setEmailErrorMessage("Please enter valid email");
-      return;
-    }
-    setIsLoading(true);
-    try {
-      // const loginData = await logIn({ email, password });
-      // await asyncStorageService.setAccessToken(loginData.data.access);
-      // await asyncStorageService.setRefreshToken(loginData.data.refresh);
-      // const userData = await getMe();
-      // dispatch(userActions.userLogin(userData.data));
-      // setIsLoading(false);
-    } catch (error) {
-      setPasswordErrorMessage("Unable to Log in with the provided credentials");
-      setIsLoading(false);
-    }
-  };
-
-  const handleSignUp = () => {
-    // navigate(AuthRoutes.SignUp);
-  };
 
   const handlePressGoogleLogin = async () => {
     try {
@@ -95,10 +58,6 @@ const LogIn = () => {
     }
   };
 
-  const handlePressAppleLogin = async () => {
-    handleSignUpApple();
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <Box alignItems="center" pt={100}>
@@ -107,13 +66,12 @@ const LogIn = () => {
 
       <Box pt={40} pl={10} pr={10} fullWidth direction="row" alignItems="center">
         <View style={styles.line} />
-        <View style={styles.line} />
       </Box>
       <Box pt={200} pl={10} pr={10}>
         <CustomButton
           variant={BUTTON_VARIANTS.primary}
           onPress={handlePressGoogleLogin}
-          title="Continue with Google"
+          title={t('continueWithGoogle')}
           rightIcon="google"
         />
       </Box>
@@ -121,8 +79,8 @@ const LogIn = () => {
         <CustomButton
           isLoading={isLoadingApple === 'FETCH'}
           variant={BUTTON_VARIANTS.primary}
-          onPress={handlePressAppleLogin}
-          title="Continue with Apple"
+          onPress={handleSignUpApple}
+          title={t('continueWithApple')}
           rightIcon="apple"
         />
       </Box>

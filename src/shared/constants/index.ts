@@ -1,4 +1,4 @@
-import { Dimensions, LayoutAnimation } from "react-native";
+import { Dimensions, LayoutAnimation, NativeModules, Platform } from "react-native";
 
 export const SUPPORT_EMAIL = 'easyFind@gmail.com';
 
@@ -74,4 +74,24 @@ export const SIZE = {
   xxl: 28,
   /** x3l = 36 */
   x3l: 36,
+}
+export const isIOS = Platform.OS === 'ios';
+
+const locale = isIOS
+  ? NativeModules.SettingsManager.settings.AppleLocale ||
+  NativeModules.SettingsManager.settings.AppleLanguages[0]
+  : NativeModules.I18nManager.localeIdentifier;
+
+export enum AppLanguages {
+  En = 'en',
+  Ua = 'es',
+}
+
+export const AppLanguagesNames: { [key: string]: string } = {
+  "En": "English",
+  "Ua": "Spanish",
+}
+
+export enum MMKVStorageKeys {
+  Language = 'Language',
 }

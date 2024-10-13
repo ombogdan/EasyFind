@@ -13,6 +13,8 @@ import {
 import Toast from 'react-native-toast-message';
 import createToastConfig from 'shared/core/toast-config';
 import { Platform, UIManager } from 'react-native';
+import { I18nextProvider } from "react-i18next";
+import i18n from "shared/config/i18n";
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -51,8 +53,10 @@ const App = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ThemeProvider>
+          <I18nextProvider i18n={i18n}>
           <RootNavigator />
           <Toast config={createToastConfig()} />
+          </I18nextProvider>
         </ThemeProvider>
       </PersistGate>
     </Provider>
