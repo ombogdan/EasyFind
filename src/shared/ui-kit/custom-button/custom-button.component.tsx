@@ -52,7 +52,7 @@ const CustomButtonComponent = ({
         if (!disabled) {
           color = theme.palette.white;
           // eslint-disable-next-line no-nested-ternary
-          btnBackgroundColor = (rightIcon === "google" || rightIcon === "apple") ? theme.palette.dark : pressed
+          btnBackgroundColor = pressed
             ? theme.palette.accentPressed
             : theme.palette.orange;
         }
@@ -62,7 +62,7 @@ const CustomButtonComponent = ({
         if (!disabled) {
           color = pressed ? theme.palette.accentHover : theme.palette.secondary;
           // eslint-disable-next-line no-nested-ternary
-          btnBackgroundColor = (rightIcon === "google" || rightIcon === "apple") ? theme.palette.dark : pressed
+          btnBackgroundColor = pressed
             ? theme.palette.disabled
             : theme.palette.secondary;
         }
@@ -81,8 +81,8 @@ const CustomButtonComponent = ({
     switch (variant) {
       case BUTTON_VARIANTS.primary: {
         if (!disabled) {
-          color = (rightIcon === "google" || rightIcon === "apple") ? theme.palette.white : theme.palette.dark;
-        }else {
+          color = theme.palette.dark;
+        } else {
           color = theme.palette.disabled;
         }
         break;
@@ -90,7 +90,7 @@ const CustomButtonComponent = ({
       case BUTTON_VARIANTS.secondary: {
         if (!disabled) {
           // eslint-disable-next-line no-nested-ternary
-          color = (rightIcon === "google" || rightIcon === "apple") ? theme.palette.white : pressed ? theme.palette.dark : theme.palette.dark;
+          color = pressed ? theme.palette.dark : theme.palette.dark;
         }
         break;
       }
@@ -106,18 +106,17 @@ const CustomButtonComponent = ({
 
   return (
     <View>
-      <View style={[((rightIcon !== "google" && rightIcon !== "apple") && !disabled) ? styles.overloadContainer : {}]}>
+      <View style={[!disabled ? styles.overloadContainer : {}]}>
         <Pressable
           onPress={onButtonPress}
           disabled={disabled || isLoading}
-          style={defineBtnStyle}
-        >
+          style={defineBtnStyle}>
           {({ pressed }) => (
             <View>
               {!isLoading ? (
                 <View style={styles.textContainer}>
                   {leftIcon &&
-                    <AppIcon name={leftIcon} style={styles.iconLeft} size={iconSize || 24}/>
+                    <AppIcon name={leftIcon} style={styles.iconLeft} size={iconSize || 24} />
                   }
                   <Text style={[defineTextStyle(pressed), styles.btnText]}>
                     {title}
@@ -127,7 +126,7 @@ const CustomButtonComponent = ({
                       name={rightIcon}
                       style={styles.iconRight}
                       size={iconSize || 24}
-                      color={(rightIcon !== "google" && rightIcon !== "apple") ? "dark" : "white"} />
+                      color="white" />
                   }
                 </View>
               ) : (

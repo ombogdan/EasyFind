@@ -3,15 +3,6 @@ import { createStyles } from "shared/theme/createStyles";
 
 export const useStyles = createStyles(({ theme, scale }: any) =>
   StyleSheet.create({
-    loginDetailsContainer: {
-      marginTop: scale(16)
-    },
-    loginDetails: {
-      fontSize: scale(32),
-      fontWeight: "600",
-      lineHeight: scale(40),
-      color: theme.palette.dark
-    },
     forgotPassword: {
       fontSize: scale(14),
       fontWeight: "500",
@@ -24,6 +15,10 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
     },
     orText: {
       paddingHorizontal: scale(10)
+    },
+    container:{
+      flex: 1,
+      backgroundColor: '#78bcc4',
     }
   })
 );

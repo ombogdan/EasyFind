@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Pressable, Text, View } from "react-native";
+import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
 import CustomInput from "ui-kit/custom-input/custom-input.component";
 import { Box } from "ui-kit/box";
 import { CustomButton } from "ui-kit/custom-button";
-import { BUTTON_VARIANTS, emailRegexp } from "constants/index";
+import { BUTTON_VARIANTS, emailRegexp, LOGO_ICON } from "constants/index";
 import { navigate } from "shared/navigation/root-navigator.config";
 import { AuthRoutes } from "shared/navigation/auth";
 import { getMe, loginByGoogle } from "services/api/auth/auth";
@@ -100,85 +100,33 @@ const LogIn = () => {
   };
 
   return (
-    <View>
-      <View style={styles.loginDetailsContainer}>
-        <Text style={styles.loginDetails}>Login</Text>
-      </View>
-      <Box pt={32}>
-        <CustomInput
-          value={email}
-          onChangeValue={(value) => {
-            setEmail(value);
-            setEmailErrorMessage("");
-          }}
-          keyboardType="email-address"
-          placeholder="Enter email"
-          errorMessage={emailErrorMessage}
-          name="Email"
-        />
+    <SafeAreaView style={styles.container}>
+      <Box alignItems="center" pt={100}>
+        <Image source={LOGO_ICON} style={styles.logo} />
       </Box>
-      <Box pt={16}>
-        <CustomInput
-          value={password}
-          onChangeValue={(value) => {
-            setPassword(value);
-            setPasswordErrorMessage("");
-          }}
-          secureTextEntry
-          placeholder="Enter password"
-          errorMessage={passwordErrorMessage}
-          name="Password"
-        />
+
+      <Box pt={40} pl={10} pr={10} fullWidth direction="row" alignItems="center">
+        <View style={styles.line} />
+        <View style={styles.line} />
       </Box>
-      <Box pt={passwordErrorMessage ? 24 : 14}>
-        <Pressable
-          onPress={() => {
-            // navigate(AuthRoutes.ForgotPassword);
-          }}
-        >
-          <Text style={styles.forgotPassword}>Forgot password?</Text>
-        </Pressable>
-      </Box>
-      <Box pt={24}>
+      <Box pt={200} pl={10} pr={10}>
         <CustomButton
           variant={BUTTON_VARIANTS.primary}
-          onPress={handleLogin}
-          title="Log in"
-          rightIcon="arrow-right"
-          isLoading={isLoading}
-        />
-      </Box>
-      <Box pt={16}>
-        <CustomButton
-          variant={BUTTON_VARIANTS.secondary}
-          onPress={handleSignUp}
-          title="Sign up"
-          rightIcon="arrow-right"
-        />
-      </Box>
-      <Box pt={40} fullWidth direction="row" alignItems="center">
-        <View style={styles.line} />
-        <Text style={styles.orText}>or</Text>
-        <View style={styles.line} />
-      </Box>
-      <Box pt={40}>
-        <CustomButton
-          variant={BUTTON_VARIANTS.secondary}
           onPress={handlePressGoogleLogin}
           title="Continue with Google"
           rightIcon="google"
         />
       </Box>
-      <Box pt={16}>
+      <Box pt={16} pl={10} pr={10}>
         <CustomButton
           isLoading={isLoadingApple === 'FETCH'}
-          variant={BUTTON_VARIANTS.secondary}
+          variant={BUTTON_VARIANTS.primary}
           onPress={handlePressAppleLogin}
           title="Continue with Apple"
           rightIcon="apple"
         />
       </Box>
-    </View>
+    </SafeAreaView>
   );
 };
 
