@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205264277767",
+    "project_id": "easyfind-3b1a6",
+    "storage_bucket": "easyfind-3b1a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205264277767:android:869ff650388cd89d8775a2",
+        "android_client_info": {
+          "package_name": "com.EasyFind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2H3rQMGr7HH2Vvraw-nK-s_q5ltD47T4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
