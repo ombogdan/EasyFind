@@ -95,3 +95,5 @@ export const AppLanguagesNames: { [key: string]: string } = {
 export enum MMKVStorageKeys {
   Language = 'Language',
 }
+export const MapboxToken = 'sk.eyJ1Ijoib21ib2dkYW4iLCJhIjoiY20yOTRteGl5MDF0aTJscXdyYTZmMXl6ZyJ9.RNtbeTWjsap1T2LBzUdvkw';
+export const ZOOM = 12;

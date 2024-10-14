@@ -18,6 +18,8 @@ target 'EasyFind' do
   config = use_native_modules!
 
   # FirebaseSessions and its dependencies
+  pod 'Firebase/Auth', :modular_headers => true
+  pod 'Firebase/Core', :modular_headers => true
   pod 'FirebaseSessions', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
   pod 'FirebaseCoreExtension', :modular_headers => true
@@ -26,6 +28,10 @@ target 'EasyFind' do
   pod 'nanopb', :modular_headers => true
   pod 'FirebaseCoreInternal', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseAuthInterop', :modular_headers => true
+  pod 'FirebaseAppCheckInterop', :modular_headers => true
+  pod 'RecaptchaInterop', :modular_headers => true
+  pod 'FirebaseAuth', :modular_headers => true
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -40,12 +46,24 @@ target 'EasyFind' do
   end
 
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    $RNMapboxMaps.post_install(installer)
     react_native_post_install(
       installer,
       config[:reactNativePath],
       :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
     )
+    installer.pods_project.targets.each do |target|
+        if target.name == 'MapboxMobileEvents'
+          `xcrun -sdk iphoneos bitcode_strip -r Pods/MapboxMobileEvents/MapboxMobileEvents.xcframework/ios-arm64_armv7/MapboxMobileEvents.framework/MapboxMobileEvents -o Pods/MapboxMobileEvents/MapboxMobileEvents.xcframework/ios-arm64_armv7/MapboxMobileEvents.framework/MapboxMobileEvents`
+        end
+
+        if target.name == 'MapboxCommon'
+          `xcrun -sdk iphoneos bitcode_strip -r Pods/MapboxCommon/MapboxCommon.xcframework/ios-arm64/MapboxCommon.framework/MapboxCommon -o Pods/MapboxCommon/MapboxCommon.xcframework/ios-arm64/MapboxCommon.framework/MapboxCommon`
+        end
+
+        if target.name == 'MapboxCoreMaps'
+          `xcrun -sdk iphoneos bitcode_strip -r Pods/MapboxCoreMaps/MapboxCoreMaps.xcframework/ios-arm64/MapboxCoreMaps.framework/MapboxCoreMaps -o Pods/MapboxCoreMaps/MapboxCoreMaps.xcframework/ios-arm64/MapboxCoreMaps.framework/MapboxCoreMaps`
+        end
+    end
   end
 end

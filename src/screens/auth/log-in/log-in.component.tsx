@@ -50,10 +50,10 @@ const LogIn = () => {
       //     dataGoogleProfile?.additionalUserInfo?.profile?.given_name ?? ""
       //   } ${dataGoogleProfile?.additionalUserInfo?.profile?.family_name ?? ""}`
       // });
-      // await asyncStorageService.setAccessToken(loginData.data.access);
-      // await asyncStorageService.setRefreshToken(loginData.data.refresh);
+      await asyncStorageService.setAccessToken('loginData.data.access');
+      await asyncStorageService.setRefreshToken('loginData.data.refresh');
       // const userData = await getMe();
-      // dispatch(userActions.userLogin(userData.data));
+      dispatch(userActions.userLogin({name: 'Bogdan'}));
     } catch (error) {
       // @ts-ignore
       console.log(error?.response?.data);
@@ -65,7 +65,6 @@ const LogIn = () => {
       <Box alignItems="center" pt={100}>
         <Image source={LOGO_ICON} style={styles.logo} />
       </Box>
-
       <Box pt={40} pl={10} pr={10} fullWidth direction="row" alignItems="center">
         <View style={styles.line} />
       </Box>
