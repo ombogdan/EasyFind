@@ -12,7 +12,20 @@
           "package_name": "com.EasyFind"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "205264277767-t75te4l1homonq4qal0u7dpgbij6m3b3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.EasyFind",
+            "certificate_hash": "056fa30e0525e2c71f498418e23138907e3c619f"
+          }
+        },
+        {
+          "client_id": "205264277767-pero3rub5m4ok98iv086dvhecdunjlg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD2H3rQMGr7HH2Vvraw-nK-s_q5ltD47T4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205264277767-pero3rub5m4ok98iv086dvhecdunjlg1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "205264277767-8mc9cq9krov8g0es0j3c734uosa2rlvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.EasyFind"
+              }
+            }
+          ]
         }
       }
     }

@@ -22,34 +22,34 @@ if (Platform.OS === 'android') {
   }
 }
 
-const App = () => {
-  const enableTrackingFeatures = async () => {
-    await firebase.analytics().setAnalyticsCollectionEnabled(true);
-  };
+const App = () => 
+  // const enableTrackingFeatures = async () => {
+  //   await firebase.analytics().setAnalyticsCollectionEnabled(true);
+  // };
 
-  const checkAnalyticPermissions = async () => {
-    const trackingStatus = await getTrackingStatus();
-    if (trackingStatus === 'authorized' || trackingStatus === 'unavailable') {
-      await enableTrackingFeatures();
-    }
-    if (trackingStatus === 'not-determined') {
-      const trackingStatusNew = await requestTrackingPermission();
-      if (
-        trackingStatusNew === 'authorized' ||
-        trackingStatusNew === 'unavailable'
-      ) {
-        await enableTrackingFeatures();
-      }
-    }
-  };
+  // const checkAnalyticPermissions = async () => {
+  //   const trackingStatus = await getTrackingStatus();
+  //   if (trackingStatus === 'authorized' || trackingStatus === 'unavailable') {
+  //     await enableTrackingFeatures();
+  //   }
+  //   if (trackingStatus === 'not-determined') {
+  //     const trackingStatusNew = await requestTrackingPermission();
+  //     if (
+  //       trackingStatusNew === 'authorized' ||
+  //       trackingStatusNew === 'unavailable'
+  //     ) {
+  //       await enableTrackingFeatures();
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    setTimeout(() => {
-      checkAnalyticPermissions();
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     checkAnalyticPermissions();
+  //   }, 1000);
+  // }, []);
 
-  return (
+   (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ThemeProvider>
@@ -60,6 +60,6 @@ const App = () => {
         </ThemeProvider>
       </PersistGate>
     </Provider>
-  );
-};
+  )
+;
 export default App;
