@@ -25,6 +25,8 @@ const MainTabNavigator = () => (
     screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}
   >
     <Tab.Screen name={AppUserRoutes.Home} component={Home} />
+    <Tab.Screen name={AppUserRoutes.Catalogue} component={Home} />
+    <Tab.Screen name={AppUserRoutes.Profile} component={Home} />
   </Tab.Navigator>
 );
 

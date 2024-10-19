@@ -1,24 +1,36 @@
-import { Platform, StyleSheet } from "react-native";
-import { createStyles } from "shared/theme/createStyles";
+import {StyleSheet} from "react-native";
+import {createStyles} from "shared/theme/createStyles";
 
-export const useStyles = createStyles(({ theme, scale }: any) =>
+export const useStyles = createStyles(({theme, scale}: any) =>
   StyleSheet.create({
     container: {
       flexDirection: "row",
-      height: Platform.OS==="ios" ? scale(104) : scale(70),
+      height: scale(70),
       justifyContent: "space-around",
       alignItems: "center",
-      backgroundColor: theme.palette.dark,
-      borderTopLeftRadius: scale(16),
-      borderTopRightRadius: scale(16),
-      paddingHorizontal: scale(8)
+      backgroundColor: theme.palette.white,
     },
     tabContainer: {
-      width: scale(89),
-      alignItems: "center"
+      height: scale(70),
+      width: scale(70),
+      alignItems: "center",
+      justifyContent: "center",
     },
-    tabIcon:{
-      marginBottom: scale(8)
+    tabIcon: {},
+    itemButtonContainer: {
+      height: scale(45),
+      width: scale(45),
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: 'row',
+      borderRadius: scale(10),
+    },
+    line: {
+      height: scale(28),
+      width: scale(1),
+      backgroundColor: theme.palette.secondaryWhite,
+      borderRadius: scale(5),
+      opacity: 1,
     }
   })
-);
+)

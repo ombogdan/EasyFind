@@ -3,6 +3,9 @@ export interface IAppTheme {
     dark: `#${string}`;
     primary: `#${string}`;
     gray: `#${string}`;
+    textDefault: `#${string}`;
+    blue: `#${string}`;
+    blueSecondary: `#${string}`;
     disabled: `#${string}`;
     secondary: `#${string}`;
     white: `#${string}`;
@@ -33,6 +36,9 @@ export const defaultTheme: IAppTheme = {
     primaryGray: '#66727F',
     grayPrimary: '#6A6A6A',
     gray: '#8C8A8A',
+    textDefault: '#1D3252',
+    blue: '#3C8AE6',
+    blueSecondary: '#4A87CE',
     disabled: '#AAA8A8',
     grayLight: '#B8B8B8',
     secondaryDisabled: '#DCD6D6',
