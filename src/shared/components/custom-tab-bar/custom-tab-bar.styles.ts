@@ -8,7 +8,7 @@ export const useStyles = createStyles(({theme, scale}: any) =>
       height: scale(70),
       justifyContent: "space-around",
       alignItems: "center",
-      backgroundColor: theme.palette.white,
+      backgroundColor: theme.palette.textDefault,
     },
     tabContainer: {
       height: scale(70),

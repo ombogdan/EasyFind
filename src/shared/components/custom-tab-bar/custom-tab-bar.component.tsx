@@ -75,17 +75,12 @@ const CustomTabBar = ({state, descriptors, navigation}: BottomTabBarProps) => {
                   onPress={onPress}
                   onLongPress={onLongPress}
                   style={styles.tabContainer}>
-                  <View style={[styles.itemButtonContainer, isFocused && {backgroundColor: theme.palette.blue}]}>
                     <AppIcon
                       size={30}
                       name={tabsIcon[label]}
                       style={styles.tabIcon}
-                      color={isFocused ? "white" : "textDefault"}/>
-                  </View>
+                      color={isFocused ? "blue" : "white"}/>
                 </TouchableOpacity>
-                {index !== state.routes.length - 1 && (
-                  <View style={styles.line}/>
-                )}
               </React.Fragment>
             );
           })}
