@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 
-import { Image, SafeAreaView, View } from "react-native";
+import { Dimensions, Image, ImageBackground, SafeAreaView, View } from "react-native";
 import { Box } from "ui-kit/box";
 import { CustomButton } from "ui-kit/custom-button";
-import { BUTTON_VARIANTS, LOGO_ICON } from "constants/index";
-import { getMe, loginByGoogle } from "services/api/auth/auth";
+import { BUTTON_VARIANTS, LOGIN_BACKGROUND, LOGO_ICON } from "constants/index";
 import { asyncStorageService } from "services/async-storage-service";
 import { userActions } from "store/slices/user";
 import { useTypedDispatch } from "store/index";
@@ -33,16 +32,16 @@ const LogIn = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo)
-      console.log('userInfo')
+      console.log(userInfo);
+      console.log("userInfo");
       const googleCredential = auth.GoogleAuthProvider.credential(
         userInfo.idToken
       );
       // const dataGoogleProfile = await auth().signInWithCredential(
       //   googleCredential
       // );
-      console.log(googleCredential)
-      console.log('googleCredential')
+      console.log(googleCredential);
+      console.log("googleCredential");
       // const loginData = await loginByGoogle({
       //   id_token: userInfo?.idToken ?? "",
       //   email: dataGoogleProfile?.additionalUserInfo?.profile?.email ?? "",
@@ -50,10 +49,10 @@ const LogIn = () => {
       //     dataGoogleProfile?.additionalUserInfo?.profile?.given_name ?? ""
       //   } ${dataGoogleProfile?.additionalUserInfo?.profile?.family_name ?? ""}`
       // });
-      await asyncStorageService.setAccessToken('loginData.data.access');
-      await asyncStorageService.setRefreshToken('loginData.data.refresh');
+      await asyncStorageService.setAccessToken("loginData.data.access");
+      await asyncStorageService.setRefreshToken("loginData.data.refresh");
       // const userData = await getMe();
-      dispatch(userActions.userLogin({name: 'Bogdan'}));
+      dispatch(userActions.userLogin({ name: "Bogdan" }));
     } catch (error) {
       // @ts-ignore
       console.log(error?.response?.data);
@@ -61,31 +60,30 @@ const LogIn = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Box alignItems="center" pt={100}>
-        <Image source={LOGO_ICON} style={styles.logo} />
-      </Box>
-      <Box pt={40} pl={10} pr={10} fullWidth direction="row" alignItems="center">
-        <View style={styles.line} />
-      </Box>
-      <Box pt={200} pl={10} pr={10}>
-        <CustomButton
-          variant={BUTTON_VARIANTS.primary}
-          onPress={handlePressGoogleLogin}
-          title={t("continueWithGoogle")}
-          rightIcon="google"
-        />
-      </Box>
-      <Box pt={16} pl={10} pr={10}>
-        <CustomButton
-          isLoading={isLoadingApple === "FETCH"}
-          variant={BUTTON_VARIANTS.primary}
-          onPress={handleSignUpApple}
-          title={t("continueWithApple")}
-          rightIcon="apple"
-        />
-      </Box>
-    </SafeAreaView>
+    <ImageBackground
+      source={LOGIN_BACKGROUND}
+      resizeMode="cover"
+      style={styles.container}>
+      <SafeAreaView style={styles.mainContainer}>
+        <Box alignItems="center" pt={64}>
+          <Image source={LOGO_ICON} style={styles.logo} />
+        </Box>
+        <Box mb={50} pl={16} pr={16}>
+          <CustomButton
+            variant={BUTTON_VARIANTS.primary}
+            onPress={handlePressGoogleLogin}
+            title={t("continueWithGoogle")}
+          />
+          <CustomButton
+            isLoading={isLoadingApple === "FETCH"}
+            variant={BUTTON_VARIANTS.primary}
+            onPress={handleSignUpApple}
+            title={t("continueWithApple")}
+          />
+        </Box>
+
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

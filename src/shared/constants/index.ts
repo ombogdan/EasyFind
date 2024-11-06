@@ -36,7 +36,8 @@ export const BUTTON_VARIANTS = {
 export const LOTTIE_BLACK_LOADER = require('shared/assets/lottie/loader-black.json');
 export const LOTTIE_WHITE_LOADER = require('shared/assets/lottie/loader-white.json');
 
-export const LOGO_ICON = require('shared/assets/images/logo.jpg');
+export const LOGO_ICON = require('shared/assets/images/logoCircle.png');
+export const LOGIN_BACKGROUND = require('shared/assets/images/loginBackground.png');
 
 export const FONT_SIZE = {
   /** xs = 10 */

@@ -105,38 +105,34 @@ const CustomButtonComponent = ({
   };
 
   return (
-    <View>
-      <View style={[!disabled ? styles.overloadContainer : {}]}>
-        <Pressable
-          onPress={onButtonPress}
-          disabled={disabled || isLoading}
-          style={defineBtnStyle}>
-          {({ pressed }) => (
-            <View>
-              {!isLoading ? (
-                <View style={styles.textContainer}>
-                  {leftIcon &&
-                    <AppIcon name={leftIcon} style={styles.iconLeft} size={iconSize || 24} />
-                  }
-                  <Text style={[defineTextStyle(pressed), styles.btnText]}>
-                    {title}
-                  </Text>
-                  {rightIcon &&
-                    <AppIcon
-                      name={rightIcon}
-                      style={styles.iconRight}
-                      size={iconSize || 24}
-                      color="white" />
-                  }
-                </View>
-              ) : (
-                <Lottie style={styles.loader} source={loader} autoPlay loop />
-              )}
+    <Pressable
+      onPress={onButtonPress}
+      disabled={disabled || isLoading}
+      style={defineBtnStyle}>
+      {({ pressed }) => (
+        <View>
+          {!isLoading ? (
+            <View style={styles.textContainer}>
+              {leftIcon &&
+                <AppIcon name={leftIcon} style={styles.iconLeft} size={iconSize || 24} />
+              }
+              <Text style={[defineTextStyle(pressed), styles.btnText]}>
+                {title}
+              </Text>
+              {rightIcon &&
+                <AppIcon
+                  name={rightIcon}
+                  style={styles.iconRight}
+                  size={iconSize || 24}
+                  color="white" />
+              }
             </View>
+          ) : (
+            <Lottie style={styles.loader} source={loader} autoPlay loop />
           )}
-        </Pressable>
-      </View>
-    </View>
+        </View>
+      )}
+    </Pressable>
   );
 };
 
