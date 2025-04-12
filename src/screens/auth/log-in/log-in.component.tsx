@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Dimensions, Image, ImageBackground, SafeAreaView, View } from "react-native";
+import { Image, ImageBackground, SafeAreaView } from "react-native";
 import { Box } from "ui-kit/box";
 import { CustomButton } from "ui-kit/custom-button";
 import { BUTTON_VARIANTS, LOGIN_BACKGROUND, LOGO_ICON } from "constants/index";
