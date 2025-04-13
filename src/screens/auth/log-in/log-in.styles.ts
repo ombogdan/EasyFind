@@ -9,11 +9,16 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
     },
     logo: {
       height: scale(288),
-      width: scale(288),
+      width: scale(288)
     },
-    mainContainer:{
+    mainContainer: {
       height: Dimensions.get("window").height,
       justifyContent: "space-between"
+    },
+    orText: {
+      color: theme.palette.dark,
+      fontWeight: "400",
+      fontSize: scale(16)
     }
   })
 );

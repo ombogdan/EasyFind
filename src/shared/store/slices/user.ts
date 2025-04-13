@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthData } from 'shared/types';
 import { RootState } from '..';
 
 interface AuthState {
-  userData: AuthData | null;
+  userData: any;
   authed: boolean;
 }
 

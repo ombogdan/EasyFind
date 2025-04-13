@@ -1,24 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Image, ImageBackground, SafeAreaView } from "react-native";
+import { Image, ImageBackground, Platform, SafeAreaView, Text } from "react-native";
 import { Box } from "ui-kit/box";
-import { CustomButton } from "ui-kit/custom-button";
-import { BUTTON_VARIANTS, LOGIN_BACKGROUND, LOGO_ICON } from "constants/index";
-import { asyncStorageService } from "services/async-storage-service";
-import { userActions } from "store/slices/user";
+import { LOGIN_BACKGROUND, LOGO_ICON } from "constants/index";
 import { useTypedDispatch } from "store/index";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import auth from "@react-native-firebase/auth";
 import useSignUpApple from "shared/hooks/api/auth/useSignUpApple";
 import { useTranslation } from "react-i18next";
+import { api } from "services/api";
+import { asyncStorageService } from "services/async-storage-service";
+import { userActions } from "store/slices/user";
 import { useStyles } from "./log-in.styles";
-
+import SignButton from "./components/sign-button/sign-button.component";
 
 const LogIn = () => {
   const styles = useStyles();
   const dispatch = useTypedDispatch();
-  const { handleSignUpApple, loading: isLoadingApple } = useSignUpApple();
+  const { handleSignUpApple, loading } = useSignUpApple();
   const { t } = useTranslation();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -30,32 +31,18 @@ const LogIn = () => {
 
   const handlePressGoogleLogin = async () => {
     try {
+      setIsLoading(true);
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
-      console.log("userInfo");
-      const googleCredential = auth.GoogleAuthProvider.credential(
-        userInfo.idToken
-      );
-      // const dataGoogleProfile = await auth().signInWithCredential(
-      //   googleCredential
-      // );
-      console.log(googleCredential);
-      console.log("googleCredential");
-      // const loginData = await loginByGoogle({
-      //   id_token: userInfo?.idToken ?? "",
-      //   email: dataGoogleProfile?.additionalUserInfo?.profile?.email ?? "",
-      //   full_name: `${
-      //     dataGoogleProfile?.additionalUserInfo?.profile?.given_name ?? ""
-      //   } ${dataGoogleProfile?.additionalUserInfo?.profile?.family_name ?? ""}`
-      // });
-      await asyncStorageService.setAccessToken("loginData.data.access");
-      await asyncStorageService.setRefreshToken("loginData.data.refresh");
-      // const userData = await getMe();
-      dispatch(userActions.userLogin({ name: "Bogdan" }));
+      const { data } = await api.auth.loginByGoogle(userInfo?.idToken ?? "")
+      await asyncStorageService.setAccessToken(data.access);
+      await asyncStorageService.setRefreshToken(data.refresh);
+      dispatch(userActions.userLogin(data.user));
+      setIsLoading(false);
     } catch (error) {
       // @ts-ignore
       console.log(error?.response?.data);
+      setIsLoading(false);
     }
   };
 
@@ -69,16 +56,24 @@ const LogIn = () => {
           <Image source={LOGO_ICON} style={styles.logo} />
         </Box>
         <Box mb={50} pl={16} pr={16}>
-          <CustomButton
-            variant={BUTTON_VARIANTS.primary}
+          {Platform.OS === "ios" && (
+            <SignButton
+              apple
+              isLoading={loading}
+              onPress={handleSignUpApple}
+              title={t("continueWithApple")}
+            />
+          )}
+          {Platform.OS === "ios" && (
+            <Box pt={13} pb={20} fullWidth alignItems="center">
+              <Text style={styles.orText}>{t("or")}</Text>
+            </Box>
+          )}
+          <SignButton
+            apple={false}
+            isLoading={isLoading}
             onPress={handlePressGoogleLogin}
             title={t("continueWithGoogle")}
-          />
-          <CustomButton
-            isLoading={isLoadingApple === "FETCH"}
-            variant={BUTTON_VARIANTS.primary}
-            onPress={handleSignUpApple}
-            title={t("continueWithApple")}
           />
         </Box>
 

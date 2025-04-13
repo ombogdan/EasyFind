@@ -1,5 +1,7 @@
 {
   "continueWithGoogle": "Sign in with Google",
   "continueWithApple": "Sign in with Apple",
-  "searchPlaceholder": "Search..."
+  "searchPlaceholder": "Search...",
+  "or": "Or"
+
 }

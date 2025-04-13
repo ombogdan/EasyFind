@@ -4,7 +4,7 @@ import { store } from "store/index";
 import { asyncStorageService } from "../async-storage-service";
 
 const TOKEN_TYPE = "Bearer";
-const BASE_URL = "https://easyFind.xyz";
+const BASE_URL = "https://easyfindbackend.onrender.com/";
 
 export const apiInstance = axios.create({
   baseURL: BASE_URL
@@ -24,7 +24,7 @@ apiInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshToken = await asyncStorageService.getRefreshToken();
-        const { data } = await axios.post(`${BASE_URL}/api/v1/user/token/refresh/`, {
+        const { data } = await axios.post(`${BASE_URL}/api/token/refresh/`, {
           refresh: refreshToken
         });
         await asyncStorageService.setAccessToken(data.access);

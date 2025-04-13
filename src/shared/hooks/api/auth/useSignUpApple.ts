@@ -6,7 +6,7 @@ import { asyncStorageService } from 'shared/core/services/async-storage-service'
 import { userActions } from 'shared/store/slices/user';
 
 const useSignUpApple = () => {
-  const [loading, setLoading] = useState('COMPLETE');
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleSignUpUser = async (authorizationCode: string) => {
@@ -23,7 +23,7 @@ const useSignUpApple = () => {
   };
 
   const handleSignUpApple = async () => {
-    setLoading('FETCH');
+    setLoading(true);
     try {
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
@@ -39,7 +39,7 @@ const useSignUpApple = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading('COMPLETE');
+      setLoading(false);
     }
   };
 
