@@ -6,14 +6,14 @@ import { MMKVStorageService } from "shared/services/mmkv";
 
 import { initReactI18next } from "react-i18next";
 import en from "./locales/en.json";
-import ua from "./locales/ua.json";
+import uk from "./locales/ua.json";
 
 const resources = {
+  [AppLanguages.Uk]: {
+    translation: uk
+  },
   [AppLanguages.En]: {
     translation: en
-  },
-  [AppLanguages.Ua]: {
-    translation: ua
   }
 };
 
@@ -21,6 +21,8 @@ const locale = isIOS
   ? NativeModules.SettingsManager.settings.AppleLocale ||
   NativeModules.SettingsManager.settings.AppleLanguages[0]
   : NativeModules.I18nManager.localeIdentifier;
+
+console.log("locale", locale); // Додай це для дебагу
 
 export const systemLanguage =
   locale && Object.values(AppLanguages).includes(locale.substring(0, 2))

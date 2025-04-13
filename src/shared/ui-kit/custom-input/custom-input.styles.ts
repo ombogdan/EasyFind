@@ -1,26 +1,27 @@
 import { StyleSheet } from "react-native";
 import { createStyles } from "shared/theme/createStyles";
+import { hexToRGBA } from "utils/hexToRgba";
 
-export const useStyles = createStyles(({ error, scale, theme, leftIcon, rightIcon, search }: any) =>
+export const useStyles = createStyles(({ error, scale, theme, leftIcon, rightIcon }: any) =>
   StyleSheet.create({
     container: {
       flexDirection: "column",
-      borderRadius: scale(15),
+      borderRadius: scale(10),
       width: "100%",
       paddingBottom: scale(12),
-      height: !error ? scale(72) : scale(82),
+      height: scale(36)
     },
     input: {
       width: "100%",
-      height: scale(44),
-      paddingTop: scale(8),
+      height: scale(36),
       paddingRight: rightIcon ? scale(36) : scale(12),
-      paddingBottom: scale(8),
       paddingLeft: leftIcon ? scale(35) : scale(12),
-      borderRadius: search ? scale(16) : scale(24),
-      borderWidth: scale(2),
-      backgroundColor:  error ? theme.palette.white : theme.palette.secondary,
-      borderColor: error ? theme.palette.danger : theme.palette.primaryGray
+      borderRadius: scale(10),
+      backgroundColor: hexToRGBA(theme.palette.white, 0.24),
+      borderColor: error ? theme.palette.danger : theme.palette.primaryGray,
+      fontWeight: "400",
+      fontSize: scale(13),
+      color: theme.palette.white
     },
     inputContainer: {
       flexDirection: "row",
@@ -42,8 +43,7 @@ export const useStyles = createStyles(({ error, scale, theme, leftIcon, rightIco
       width: scale(24),
       height: scale(24),
       position: "absolute",
-      top: scale(10),
-      left: scale(7),
+      left: scale(6),
       zIndex: 100
     },
     rightIcon: {
@@ -51,7 +51,7 @@ export const useStyles = createStyles(({ error, scale, theme, leftIcon, rightIco
       height: scale(24),
       position: "absolute",
       top: -scale(12),
-      right: scale(7),
+      right: scale(7)
     }
   })
 );

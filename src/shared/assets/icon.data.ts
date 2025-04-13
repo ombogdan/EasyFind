@@ -4,4 +4,6 @@ export const APP_ICONS = Object.freeze({
   'google': require('shared/assets/icons/google.png'),
   'work': require('shared/assets/icons/work.png'),
   'profile': require('shared/assets/icons/profile.png'),
+  'search': require('shared/assets/icons/search.png'),
+  'map': require('shared/assets/icons/map.png'),
 });

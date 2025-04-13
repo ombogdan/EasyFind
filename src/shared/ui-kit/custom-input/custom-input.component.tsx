@@ -1,8 +1,9 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CustomInputProps } from 'ui-kit/custom-input/custom-input.types';
 import { useTheme } from 'shared/theme/ThemeProvider';
 import { AppIcon } from 'assets/index';
+import { hexToRGBA } from "utils/hexToRgba";
 import { useStyles } from './custom-input.styles';
 
 // eslint-disable-next-line react/display-name
@@ -19,7 +20,6 @@ const CustomInput = forwardRef(
       keyboardType = 'default',
       leftIcon,
       rightIcon,
-      secureTextEntry,
       search,
       onFocus,
       onBlur,
@@ -36,7 +36,6 @@ const CustomInput = forwardRef(
       search,
     });
     const { theme } = useTheme();
-    const [securePassword, setSecurePassword] = useState(true);
 
     const handleFocus = (e: any) => {
       if (onFocus) {
@@ -59,7 +58,7 @@ const CustomInput = forwardRef(
         )}
         <View style={[styles.inputContainer, styleInput]}>
           {leftIcon && (
-            <AppIcon name={leftIcon} style={styles.leftIcon} color="gray" />
+            <AppIcon name={leftIcon} style={styles.leftIcon} color="white" />
           )}
           <TextInput
             ref={ref}
@@ -70,23 +69,12 @@ const CustomInput = forwardRef(
             value={value}
             multiline={multiline}
             textAlignVertical={multiline ? 'top' : 'center'}
-            secureTextEntry={secureTextEntry ? securePassword : false}
             keyboardType={keyboardType}
             placeholder={placeholder}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            placeholderTextColor={theme.palette.gray}
+            placeholderTextColor={hexToRGBA(theme.palette.white, 0.8)}
           />
-          {secureTextEntry && (
-            <TouchableOpacity
-              onPress={() => setSecurePassword(!securePassword)}
-            >
-              <AppIcon
-                name={securePassword ? 'eye' : 'eye_close'}
-                style={styles.rightIcon}
-              />
-            </TouchableOpacity>
-          )}
           {rightIcon && (
             <TouchableOpacity onPress={onRightIconPress}>
               <AppIcon name={rightIcon} style={styles.rightIcon} />
