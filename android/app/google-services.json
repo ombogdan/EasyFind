@@ -2,23 +2,23 @@
   "project_info": {
     "project_number": "205264277767",
     "project_id": "easyfind-3b1a6",
-    "storage_bucket": "easyfind-3b1a6.appspot.com"
+    "storage_bucket": "easyfind-3b1a6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:205264277767:android:869ff650388cd89d8775a2",
+        "mobilesdk_app_id": "1:205264277767:android:fb43c91c819bf4a28775a2",
         "android_client_info": {
-          "package_name": "com.EasyFind"
+          "package_name": "com.easyfind"
         }
       },
       "oauth_client": [
         {
-          "client_id": "205264277767-t75te4l1homonq4qal0u7dpgbij6m3b3.apps.googleusercontent.com",
+          "client_id": "205264277767-algmkbu0l8vuvqrej7mub1esu0369mt4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.EasyFind",
-            "certificate_hash": "056fa30e0525e2c71f498418e23138907e3c619f"
+            "package_name": "com.easyfind",
+            "certificate_hash": "fd4a24b7f3845738fc0b525105e2c7759b3ee20c"
           }
         },
         {

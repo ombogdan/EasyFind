@@ -28,20 +28,21 @@ const LogIn = () => {
     });
   }, []);
 
-
   const handlePressGoogleLogin = async () => {
     try {
       setIsLoading(true);
-      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
       const userInfo = await GoogleSignin.signIn();
-      const { data } = await api.auth.loginByGoogle(userInfo?.idToken ?? "")
-      await asyncStorageService.setAccessToken(data.access);
-      await asyncStorageService.setRefreshToken(data.refresh);
-      dispatch(userActions.userLogin(data.user));
+      if (userInfo.idToken) {
+        const { data } = await api.auth.loginByGoogle(userInfo?.idToken ?? "");
+        await asyncStorageService.setAccessToken(data.access);
+        await asyncStorageService.setRefreshToken(data.refresh);
+        dispatch(userActions.userLogin(data.user));
+      }
       setIsLoading(false);
     } catch (error) {
       // @ts-ignore
-      console.log(error?.response?.data);
+      console.log(error.response.data);
       setIsLoading(false);
     }
   };

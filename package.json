@@ -24,7 +24,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "@reduxjs/toolkit": "^2.2.8",
-    "@rnmapbox/maps": "^10.1.31",
+    "@rnmapbox/maps": "10.1.33",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "i18next": "^23.2.8",
