@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
     },
     homeBackground: {
       height: scale(115),
-      position: "absolute"
+      position: "absolute",
     },
     mapButtonContainer: {
       padding: scale(5),
