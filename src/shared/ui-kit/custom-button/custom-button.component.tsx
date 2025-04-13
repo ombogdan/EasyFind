@@ -25,20 +25,20 @@ const CustomButtonComponent = ({
   const styles = useStyles({ disabled, title });
   const { theme } = useTheme();
   let color: string = theme.palette.dark;
-  let btnBackgroundColor: string = theme.palette.accent;
+  let btnBackgroundColor: string = theme.palette.dark;
   let loader: string = LOTTIE_BLACK_LOADER;
 
   // eslint-disable-next-line default-case
   switch (variant) {
     case BUTTON_VARIANTS.primary: {
       color = theme.palette.dark;
-      btnBackgroundColor = disabled ? theme.palette.accentDisabled1 : theme.palette.accent;
+      btnBackgroundColor = disabled ? theme.palette.backgroundLight : theme.palette.accentBlue;
       loader = LOTTIE_WHITE_LOADER;
       break;
     }
     case BUTTON_VARIANTS.secondary: {
-      color = disabled ? theme.palette.accentDisabled : theme.palette.accent;
-      btnBackgroundColor = theme.palette.secondary;
+      color = disabled ? theme.palette.white : theme.palette.dark;
+      btnBackgroundColor = theme.palette.dark;
       loader = LOTTIE_BLACK_LOADER;
       break;
     }
@@ -53,18 +53,18 @@ const CustomButtonComponent = ({
           color = theme.palette.white;
           // eslint-disable-next-line no-nested-ternary
           btnBackgroundColor = pressed
-            ? theme.palette.accentPressed
-            : theme.palette.orange;
+            ? theme.palette.dark
+            : theme.palette.dark;
         }
         break;
       }
       case BUTTON_VARIANTS.secondary: {
         if (!disabled) {
-          color = pressed ? theme.palette.accentHover : theme.palette.secondary;
+          color = pressed ? theme.palette.dark : theme.palette.dark;
           // eslint-disable-next-line no-nested-ternary
           btnBackgroundColor = pressed
-            ? theme.palette.disabled
-            : theme.palette.secondary;
+            ? theme.palette.dark
+            : theme.palette.dark;
         }
         break;
       }
@@ -83,7 +83,7 @@ const CustomButtonComponent = ({
         if (!disabled) {
           color = theme.palette.dark;
         } else {
-          color = theme.palette.disabled;
+          color = theme.palette.dark;
         }
         break;
       }

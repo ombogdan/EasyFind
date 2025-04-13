@@ -5,16 +5,14 @@ export const useStyles = createStyles(({theme, scale}: any) =>
   StyleSheet.create({
     container: {
       flexDirection: "row",
-      height: scale(70),
+      height: scale(78),
       justifyContent: "space-around",
-      alignItems: "center",
-      backgroundColor: theme.palette.textDefault,
+      backgroundColor: theme.palette.darkLight,
     },
     tabContainer: {
-      height: scale(70),
       width: scale(70),
       alignItems: "center",
-      justifyContent: "center",
+      marginTop: scale(10)
     },
     tabIcon: {},
     itemButtonContainer: {
@@ -31,6 +29,10 @@ export const useStyles = createStyles(({theme, scale}: any) =>
       backgroundColor: theme.palette.secondaryWhite,
       borderRadius: scale(5),
       opacity: 1,
+    },
+    tabName:{
+      marginTop: scale(6),
+
     }
   })
 )

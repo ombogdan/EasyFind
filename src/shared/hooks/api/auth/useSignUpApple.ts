@@ -1,9 +1,10 @@
 import appleAuth from '@invertase/react-native-apple-authentication';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginByApple, getMe } from 'shared/core/services/api/auth/auth';
+import { loginByApple } from 'shared/core/services/api/auth/auth';
 import { asyncStorageService } from 'shared/core/services/async-storage-service';
 import { userActions } from 'shared/store/slices/user';
+import { api } from "services/api";
 
 const useSignUpApple = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ const useSignUpApple = () => {
 
       await asyncStorageService.setAccessToken(respones.data.access);
       await asyncStorageService.setRefreshToken(respones.data.refresh);
-      const userData = await getMe();
+      const userData = await api.user.getMe();
       dispatch(userActions.userLogin(userData.data));
     } catch (error) {
       console.log(error);

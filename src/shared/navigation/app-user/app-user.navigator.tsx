@@ -6,8 +6,6 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import { Home } from 'screens/app-user/home';
-import { selectUserMe } from 'store/selectors/user';
-import { useTypedSelector } from 'store/index';
 import { CustomTabBar } from 'components/custom-tab-bar';
 import { AppUserRoutesParamList } from './app-user.navigator.types';
 import { AppUserRoutes } from './app-user.navigator.enums';
@@ -25,15 +23,12 @@ const MainTabNavigator = () => (
     screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}
   >
     <Tab.Screen name={AppUserRoutes.Home} component={Home} />
-    <Tab.Screen name={AppUserRoutes.Catalogue} component={Home} />
+    <Tab.Screen name={AppUserRoutes.Bookings} component={Home} />
     <Tab.Screen name={AppUserRoutes.Profile} component={Home} />
   </Tab.Navigator>
 );
 
-export const AppUserNavigator = () => {
-  const user = useTypedSelector(selectUserMe);
-
-  return (
+export const AppUserNavigator = () => (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name={AppUserRoutes.HomeTabNavigation}
@@ -41,4 +36,3 @@ export const AppUserNavigator = () => {
       />
     </Stack.Navigator>
   );
-};

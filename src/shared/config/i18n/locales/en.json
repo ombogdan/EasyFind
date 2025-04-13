@@ -2,6 +2,9 @@
   "continueWithGoogle": "Sign in with Google",
   "continueWithApple": "Sign in with Apple",
   "searchPlaceholder": "Search...",
-  "or": "Or"
+  "or": "Or",
+  "home": "Home",
+  "bookings": "Bookings",
+  "profile": "Profile"
 
 }

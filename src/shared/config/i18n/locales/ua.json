@@ -2,5 +2,8 @@
   "continueWithGoogle": "Ввійти з Google",
   "continueWithApple": "Ввійти з Apple",
   "searchPlaceholder": "Пошук...",
-  "or": "Або"
+  "or": "Або",
+  "home": "Салони",
+  "bookings": "Записи",
+  "profile": "Профіль"
 }

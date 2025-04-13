@@ -1,20 +1,23 @@
-import React, {useEffect, useState} from "react";
-import {View, TouchableOpacity, Keyboard} from "react-native";
-import {useTheme} from "theme/ThemeProvider";
-import {AppIcon} from "assets/index";
-import {APP_ICONS} from "assets/icon.data";
-import {BottomTabBarProps} from "@react-navigation/bottom-tabs";
-import {useStyles} from "./custom-tab-bar.styles";
+import React, { useEffect, useState } from "react";
+import { View, TouchableOpacity, Keyboard, Text } from "react-native";
+import { useTheme } from "theme/ThemeProvider";
+import { AppIcon } from "assets/index";
+import { APP_ICONS } from "assets/icon.data";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { useTranslation } from "react-i18next";
+import { useStyles } from "./custom-tab-bar.styles";
 
-type TabIconKey = "Home" | "Catalogue" | "Profile";
+type TabIconKey = "Home" | "Bookings" | "Profile";
 const tabsIcon: Record<TabIconKey, keyof typeof APP_ICONS> = {
   "Home": "home",
-  "Catalogue": "like",
-  "Profile": "profile",
+  "Bookings": "work",
+  "Profile": "profile"
 };
-const CustomTabBar = ({state, descriptors, navigation}: BottomTabBarProps) => {
+const CustomTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
   const styles = useStyles();
-  const {theme} = useTheme();
+  const { theme } = useTheme();
+  const { t } = useTranslation();
+
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const CustomTabBar = ({state, descriptors, navigation}: BottomTabBarProps) => {
       {visible &&
         <View style={styles.container}>
           {state.routes.map((route: any, index: number) => {
-            const {options} = descriptors[route.key];
+            const { options } = descriptors[route.key];
             const label: TabIconKey =
               options.tabBarLabel !== undefined
                 ? options.tabBarLabel
@@ -69,17 +72,20 @@ const CustomTabBar = ({state, descriptors, navigation}: BottomTabBarProps) => {
               <React.Fragment key={`item_${label}`}>
                 <TouchableOpacity
                   accessibilityRole="button"
-                  accessibilityState={isFocused ? {selected: true} : {}}
+                  accessibilityState={isFocused ? { selected: true } : {}}
                   accessibilityLabel={options.tabBarAccessibilityLabel}
                   testID={options.tabBarTestID}
                   onPress={onPress}
                   onLongPress={onLongPress}
                   style={styles.tabContainer}>
-                    <AppIcon
-                      size={30}
-                      name={tabsIcon[label]}
-                      style={styles.tabIcon}
-                      color={isFocused ? "blue" : "white"}/>
+                  <AppIcon
+                    size={30}
+                    name={tabsIcon[label]}
+                    style={styles.tabIcon}
+                    color={isFocused ? "accentPurple" : "lightMedium"} />
+                  <Text style={[styles.tabName, { color: isFocused ? theme.palette.accentPurple : theme.palette.lightMedium }]}>
+                    {t(label.toLowerCase())}
+                  </Text>
                 </TouchableOpacity>
               </React.Fragment>
             );

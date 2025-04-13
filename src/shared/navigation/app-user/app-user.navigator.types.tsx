@@ -5,8 +5,7 @@ import { AppUserRoutes } from './app-user.navigator.enums';
 
 export type AppUserRoutesParamList = {
   [AppUserRoutes.Home]: {} | undefined;
-  [AppUserRoutes.Search]: {} | undefined;
-  [AppUserRoutes.Likes]: {} | undefined;
+  [AppUserRoutes.Bookings]: {} | undefined;
   [AppUserRoutes.Profile]: {} | undefined;
   [AppUserRoutes.HomeTabNavigation]: {} | undefined;
 };

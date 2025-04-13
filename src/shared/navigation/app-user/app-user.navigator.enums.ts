@@ -1,6 +1,6 @@
 export enum AppUserRoutes {
   Home = 'Home',
-  Catalogue = 'Catalogue',
+  Bookings = 'Bookings',
   Profile = 'Profile',
   HomeTabNavigation = 'HomeTabNavigation',
 }
