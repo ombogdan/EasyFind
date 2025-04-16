@@ -7,6 +7,11 @@ export const selectIsUserAuthedStatus = createSelector(
   (userStore) => userStore.authed,
 );
 
+export const selectUserLocation = createSelector(
+  [selectUserStore],
+  (userStore) => userStore.userLocation,
+);
+
 export const selectUserMe = createSelector(
   [selectUserStore],
   (userStore) => userStore.userData,

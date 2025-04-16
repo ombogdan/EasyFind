@@ -22,8 +22,6 @@ const locale = isIOS
   NativeModules.SettingsManager.settings.AppleLanguages[0]
   : NativeModules.I18nManager.localeIdentifier;
 
-console.log("locale", locale); // Додай це для дебагу
-
 export const systemLanguage =
   locale && Object.values(AppLanguages).includes(locale.substring(0, 2))
     ? (locale as string).substring(0, 2)

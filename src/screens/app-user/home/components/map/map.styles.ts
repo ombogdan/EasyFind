@@ -10,6 +10,10 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
     map: {
       height: "100%",
       width: "100%"
+    },
+    notVisibleMap: {
+      height: scale(15),
+      opacity: 0
     }
   })
 );

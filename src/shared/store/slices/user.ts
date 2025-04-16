@@ -3,11 +3,13 @@ import { RootState } from '..';
 
 interface AuthState {
   userData: any;
+  userLocation: null | {latitude: number, longitude: number};
   authed: boolean;
 }
 
 const initialState: AuthState = {
   userData: null,
+  userLocation: null,
   authed: false,
 };
 
@@ -23,11 +25,8 @@ const userSlice = createSlice({
       state.userData = null;
       state.authed = false;
     },
-    setUserData(state, { payload }) {
-      state.userData = {
-        ...state.userData,
-        ...payload,
-      };
+    setUserLocation(state, { payload }) {
+      state.userLocation = payload;
     },
   },
 });
