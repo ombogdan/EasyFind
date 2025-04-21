@@ -1,3 +1,6 @@
+import { OrganizationType } from "shared/types";
+
 export interface MapProps {
-  search: string,
+  isShowMap: boolean,
+  organizationsList: OrganizationType[],
 }

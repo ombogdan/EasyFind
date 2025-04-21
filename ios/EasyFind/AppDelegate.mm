@@ -1,11 +1,13 @@
 #import "AppDelegate.h"
 #import <React/RCTBundleURLProvider.h>
 #import <Firebase.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyAKhcXSBjvoZYSOS8IYiq8NcIWAOlMHl3w"];
   [FIRApp configure];
   self.moduleName = @"EasyFind";
   // You can add your custom initial props in the dictionary below.

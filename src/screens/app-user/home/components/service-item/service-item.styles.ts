@@ -16,11 +16,17 @@ export const useStyles = createStyles(({ theme, scale }: any) =>
     },
     name: {
       fontWeight: "500",
-      fontSize: scale(16)
+      fontSize: scale(16),
+      color: theme.palette.dark,
     },
     kilometers:{
       fontWeight: "400",
-      fontSize: scale(13)
+      fontSize: scale(13),
+      color: theme.palette.dark,
+    },
+    address:{
+      fontSize: scale(11),
+      color: theme.palette.dark,
     }
   })
 );

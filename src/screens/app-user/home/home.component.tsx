@@ -10,39 +10,42 @@ import { useTypedSelector } from "store/index";
 import { selectUserLocation } from "store/selectors/user";
 import { api } from "services/api";
 import { ServiceItem } from "screens/app-user/home/components/service-item";
-import { ServiceProductType } from "shared/types";
+import { OrganizationType, ServiceProductType } from "shared/types";
 import { useStyles } from "./home.styles";
 
 const Home = () => {
   const styles = useStyles();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const userLocation = useTypedSelector(selectUserLocation);
+  const userLocation = {latitude: 50.50937716310184, longitude: 30.51322118389778};
 
   const [search, setSearch] = useState("");
   const [isShowMap, setIsShowMap] = useState(false);
   const [servicesList, setServicesList] = useState<ServiceProductType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [nearbyOrganizations, setNearbyOrganizations] = useState<OrganizationType[]>([]);
 
   const getOrganizations = async () => {
     try {
       const { data } = await api.user.getNearbyOrganizations(userLocation);
-      // console.log(data);
-      // console.log('data');
-    } catch (e) {
-       // @ts-ignore
-      console.error(e?.response?.data ?? "q");
+      const organizations = data?.results ?? [];
+      setNearbyOrganizations(organizations);
+    } catch (error: any) {
+      console.log(error);
+      console.error(error?.response?.data ?? "getOrganizations");
     }
   };
 
   const getNearbyServices = async () => {
     try {
+      setIsLoading(true);
       const { data } = await api.user.getNearbyServices({ ...userLocation, page: 1, page_size: 20 });
-      console.log(data);
-      console.log('data');
       setServicesList(data?.results ?? []);
-    } catch (e) {
-       // @ts-ignore
-      console.error(e?.response?.data ?? "q");
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error(error);
+      console.error(error?.response?.data ?? "getNearbyServices");
+      setIsLoading(false);
     }
   };
 
@@ -52,7 +55,6 @@ const Home = () => {
       getNearbyServices();
     }
   }, []);
-
 
   const handleChangeMapVisible = () => {
     setIsShowMap(!isShowMap);
@@ -78,7 +80,7 @@ const Home = () => {
           <AppIcon name="map" color="white" />
         </TouchableOpacity>
       </Box>
-      <Map isShowMap={isShowMap} />
+      <Map isShowMap={isShowMap} organizationsList={nearbyOrganizations} />
       {!isShowMap &&
         <Box pt={20} pl={16} pr={16}>
           <Text style={styles.allServices}>{t("allServices")}</Text>
@@ -86,10 +88,12 @@ const Home = () => {
             <FlatList
               keyboardShouldPersistTaps="always"
               data={servicesList}
-              ListFooterComponent={() => <Box pt={200}/>}
+              onRefresh={getNearbyServices}
+              refreshing={isLoading}
+              ListFooterComponent={() => <Box pt={200} />}
               keyExtractor={(item) => item.id.toString()}
-              renderItem={({item}) => (
-                <ServiceItem item={item}/>
+              renderItem={({ item }) => (
+                <ServiceItem item={item} />
               )}
             />
           )}

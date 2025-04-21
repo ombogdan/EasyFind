@@ -8,7 +8,7 @@
     "lint": "eslint --config ./eslint.config.js ./src",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": ""
+    "postinstall": "cd ios && pod install && cd .."
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.1.0",
@@ -24,18 +24,18 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "@reduxjs/toolkit": "^2.2.8",
-    "@rnmapbox/maps": "10.1.33",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "i18next": "^23.2.8",
     "lodash": "^4.17.21",
-    "lottie-ios": "^4.5.0",
-    "lottie-react-native": "^7.0.0",
+    "lottie-ios": "4.5.0",
+    "lottie-react-native": "7.0.0",
     "react": "18.3.1",
     "react-i18next": "^13.0.2",
     "react-native": "0.75.4",
     "react-native-device-info": "^13.1.0",
     "react-native-gesture-handler": "^2.16.0",
+    "react-native-maps": "1.20.1",
     "react-native-mmkv": "2.12.2",
     "react-native-permissions": "^5.0.0",
     "react-native-reanimated": "^3.8.1",
@@ -93,6 +93,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "packageManager": "yarn@3.6.4+sha512.e70835d4d6d62c07be76b3c1529cb640c7443f0fe434ef4b6478a5a399218cbaf1511b396b3c56eb03bc86424cff2320f6167ad2fde273aa0df6e60b7754029f"
+  }
 }

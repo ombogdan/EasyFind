@@ -1,56 +1,58 @@
 import React, { useRef, useState } from "react";
-import { View } from "react-native";
-import MapboxGL from "@rnmapbox/maps";
-import { ZOOM } from "constants/index";
+import { Platform, View } from "react-native";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { useTypedDispatch } from "store/index";
 import { userActions } from "store/slices/user";
+import { MapProps } from "screens/app-user/home/components/map/map.types";
 import { useStyles } from "./map.styles";
+import OrganizationMarker from "./components/organization-marker/organization-marker.component";
 
-MapboxGL.setAccessToken("sk.eyJ1Ijoic2lsdmVyMTgzNSIsImEiOiJjbTBkbnhtZ3cwZGc2Mm1zY3gzd201NHg2In0.7qIWJV3t3y6Qyhf7Yrxldg");
-const Map = ({ isShowMap }: { isShowMap: boolean }) => {
+const Map = ({ isShowMap, organizationsList }: MapProps) => {
   const styles = useStyles();
   const dispatch = useTypedDispatch();
-  const mapRef = useRef(null);
-  const cameraRef = useRef(null);
+  const mapRef = useRef<MapView>(null);
 
   const [initialRegion] = useState({
     latitude: 50.4939472,
     longitude: 30.5041288,
-    zoomLevel: ZOOM
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1,
   });
-  const [userLocation, setUserPosition] = useState({ latitude: 0, longitude: 0 });
 
-  const handleUpdateLocation = (location: any) => {
-    if (
-      ((userLocation?.latitude ?? 0) !== (location?.coords?.latitude ?? 0))
-    ) {
-      const locationNew = {
-        latitude: location?.coords?.latitude ?? 0,
-        longitude: location?.coords?.longitude ?? 0
-      };
-      setUserPosition(locationNew);
-      dispatch(userActions.setUserLocation(locationNew));
+  const [userLocation, setUserLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+  });
+
+  const handleUpdateLocation = (event: any) => {
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    if (userLocation.latitude !== latitude || userLocation.longitude !== longitude) {
+      const newLocation = { latitude, longitude };
+      setUserLocation(newLocation);
+      dispatch(userActions.setUserLocation(newLocation));
     }
   };
 
   return (
-    <View style={[!isShowMap ? styles.notVisibleMap : styles.container]}>
-      <MapboxGL.MapView
+    <View style={isShowMap ? styles.container : styles.notVisibleMap}>
+      <MapView
         ref={mapRef}
-        style={styles.map}>
-        <MapboxGL.Camera
-          ref={cameraRef}
-          animationDuration={0}
-          zoomLevel={initialRegion.zoomLevel}
-          centerCoordinate={[initialRegion.longitude, initialRegion.latitude]}
-        />
-        {/* -------CURRENT_POSITION-----*/}
-        <MapboxGL.UserLocation
-          visible
-          animated
-          minDisplacement={4}
-          onUpdate={handleUpdateLocation} />
-      </MapboxGL.MapView>
+        style={styles.map}
+        provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
+        initialRegion={initialRegion}
+        showsUserLocation
+        onUserLocationChange={handleUpdateLocation}>
+         {(organizationsList || []).map((org) => (
+          <OrganizationMarker
+            id={org.id}
+            key={org.id}
+            name={org.name}
+            image={org.image}
+            latitude={org.latitude}
+            longitude={org.longitude}
+          />
+         ))}
+      </MapView>
     </View>
   );
 };
