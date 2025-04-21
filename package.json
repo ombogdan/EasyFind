@@ -8,7 +8,7 @@
     "lint": "eslint --config ./eslint.config.js ./src",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "cd ios && pod install && cd .."
+    "postinstall": "patch-package && cd ios && pod install && cd .."
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.1.0",
@@ -31,6 +31,7 @@
     "lodash": "^4.17.21",
     "lottie-ios": "4.5.0",
     "lottie-react-native": "^7.2.2",
+    "patch-package": "^8.0.0",
     "react": "18.3.1",
     "react-i18next": "^13.0.2",
     "react-native": "0.75.4",
@@ -47,7 +48,8 @@
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "semver": "^7.6.3"
+    "semver": "^7.6.3",
+    "supercluster": "^8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

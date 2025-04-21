@@ -14,6 +14,7 @@ export interface IAppTheme {
     backgroundLighter: `#${string}`;
     highlightPurple: `#${string}`;
     highlightPink: `#${string}`;
+    yellow: `#${string}`;
   };
 }
 
@@ -31,6 +32,7 @@ export const defaultTheme: IAppTheme = {
     accentPurple: "#8074FF",
     highlightPurple: "#8074FF",
     accentBlue: "#04ADDC",
+    yellow: "#FFA726",
     highlightPink: "#F183D2",
     accentRed: "#FA5555"
   }
