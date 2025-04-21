@@ -1,6 +1,6 @@
 export type nearbyTypes = {
-  latitude: number,
-  longitude: number,
+  latitude: number | null,
+  longitude: number | null,
   page?: number,
   page_size?: number
 }

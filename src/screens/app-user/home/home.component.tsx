@@ -6,18 +6,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { AppIcon } from "assets/index";
 import { Map } from "screens/app-user/home/components/map";
-import { useTypedSelector } from "store/index";
-import { selectUserLocation } from "store/selectors/user";
 import { api } from "services/api";
 import { ServiceItem } from "screens/app-user/home/components/service-item";
 import { OrganizationType, ServiceProductType } from "shared/types";
+import { useUserLocation } from "hooks/useUserLocation";
 import { useStyles } from "./home.styles";
 
 const Home = () => {
   const styles = useStyles();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const userLocation = {latitude: 50.50937716310184, longitude: 30.51322118389778};
+  const { location } = useUserLocation();
 
   const [search, setSearch] = useState("");
   const [isShowMap, setIsShowMap] = useState(false);
@@ -27,9 +26,11 @@ const Home = () => {
 
   const getOrganizations = async () => {
     try {
-      const { data } = await api.user.getNearbyOrganizations(userLocation);
-      const organizations = data?.results ?? [];
-      setNearbyOrganizations(organizations);
+      if (location) {
+        const { data } = await api.user.getNearbyOrganizations(location);
+        const organizations = data?.results ?? [];
+        setNearbyOrganizations(organizations);
+      }
     } catch (error: any) {
       console.log(error);
       console.error(error?.response?.data ?? "getOrganizations");
@@ -39,7 +40,12 @@ const Home = () => {
   const getNearbyServices = async () => {
     try {
       setIsLoading(true);
-      const { data } = await api.user.getNearbyServices({ ...userLocation, page: 1, page_size: 20 });
+      const { data } = await api.user.getNearbyServices({
+        latitude: location?.latitude ?? null,
+        longitude: location?.longitude ?? null,
+        page: 1,
+        page_size: 20
+      });
       setServicesList(data?.results ?? []);
       setIsLoading(false);
     } catch (error: any) {
@@ -50,10 +56,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (userLocation) {
+    if (location) {
       getOrganizations();
-      getNearbyServices();
     }
+    getNearbyServices();
   }, []);
 
   const handleChangeMapVisible = () => {

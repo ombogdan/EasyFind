@@ -25,12 +25,12 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
   });
 
   const handleUpdateLocation = (event: any) => {
-    const { latitude, longitude } = event.nativeEvent.coordinate;
-    if (userLocation.latitude !== latitude || userLocation.longitude !== longitude) {
-      const newLocation = { latitude, longitude };
-      setUserLocation(newLocation);
-      dispatch(userActions.setUserLocation(newLocation));
-    }
+    // const { latitude, longitude } = event.nativeEvent.coordinate;
+    // if (userLocation.latitude !== latitude || userLocation.longitude !== longitude) {
+    //   const newLocation = { latitude, longitude };
+    //   setUserLocation(newLocation);
+    //   dispatch(userActions.setUserLocation(newLocation));
+    // }
   };
 
   return (
