@@ -16,21 +16,19 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
     latitude: 50.4939472,
     longitude: 30.5041288,
     latitudeDelta: 0.1,
-    longitudeDelta: 0.1,
+    longitudeDelta: 0.1
   });
+  const [userLocation, setUserLocation] = useState({ latitude: 0, longitude: 0 });
+  const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
 
-  const [userLocation, setUserLocation] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
 
   const handleUpdateLocation = (event: any) => {
-    // const { latitude, longitude } = event.nativeEvent.coordinate;
-    // if (userLocation.latitude !== latitude || userLocation.longitude !== longitude) {
-    //   const newLocation = { latitude, longitude };
-    //   setUserLocation(newLocation);
-    //   dispatch(userActions.setUserLocation(newLocation));
-    // }
+    const { latitude, longitude } = event?.nativeEvent?.coordinate ?? {};
+    if (userLocation.latitude !== latitude || userLocation.longitude !== longitude) {
+      const newLocation = { latitude, longitude };
+      setUserLocation(newLocation);
+      dispatch(userActions.setUserLocation(newLocation));
+    }
   };
 
   return (
@@ -42,7 +40,7 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
         initialRegion={initialRegion}
         showsUserLocation
         onUserLocationChange={handleUpdateLocation}>
-         {(organizationsList || []).map((org) => (
+        {(organizationsList || []).map((org) => (
           <OrganizationMarker
             id={org.id}
             key={org.id}
@@ -50,8 +48,10 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
             image={org.image}
             latitude={org.latitude}
             longitude={org.longitude}
+            selectedMarkerId={selectedMarkerId}
+            onSelect={() => setSelectedMarkerId(org.id)}
           />
-         ))}
+        ))}
       </MapView>
     </View>
   );

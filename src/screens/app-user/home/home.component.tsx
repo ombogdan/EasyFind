@@ -57,10 +57,12 @@ const Home = () => {
 
   useEffect(() => {
     if (location) {
+      console.log('getOrganizations')
       getOrganizations();
     }
+    console.log('getNearbyServices')
     getNearbyServices();
-  }, []);
+  }, [location]);
 
   const handleChangeMapVisible = () => {
     setIsShowMap(!isShowMap);

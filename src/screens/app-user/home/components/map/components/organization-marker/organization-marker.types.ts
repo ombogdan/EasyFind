@@ -1,7 +1,9 @@
 export interface OrganizationMarkerProps {
+  id: number;
+  name: string;
+  image: string;
   latitude: number;
   longitude: number;
-  image: string;
-  name: string;
-  id: number;
+  selectedMarkerId: number | null;
+  onSelect: () => void;
 }
