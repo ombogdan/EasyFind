@@ -17,6 +17,7 @@ const OrganizationMarker = ({
 
   return (
     <Marker
+      zIndex={999}
       onPress={onSelect}
       identifier={`${id}`}
       coordinate={{ latitude, longitude }}>

@@ -7,6 +7,7 @@ import { MapProps } from "screens/app-user/home/components/map/map.types";
 import { useClusteredPoints } from "hooks/useClusteredPoints";
 import { useStyles } from "./map.styles";
 import OrganizationMarker from "./components/organization-marker/organization-marker.component";
+import { OrganizationInfoModal } from "./components/organization-info-modal";
 
 const Map = ({ isShowMap, organizationsList }: MapProps) => {
   const styles = useStyles();
@@ -21,9 +22,9 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
   });
   const [region, setRegion] = useState(initialRegion);
   const clusters = useClusteredPoints(organizationsList, region);
-
   const [userLocation, setUserLocation] = useState({ latitude: 0, longitude: 0 });
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
+  const [selectedOrganization, setSelectedOrganization] = useState<any | null>(null);
 
   const handleUpdateLocation = (event: any) => {
     const { latitude, longitude } = event?.nativeEvent?.coordinate ?? {};
@@ -39,16 +40,18 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
       <MapView
         ref={mapRef}
         style={styles.map}
+        mapType="standard"
         provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
         initialRegion={initialRegion}
         showsUserLocation
         onRegionChangeComplete={setRegion}
         onUserLocationChange={handleUpdateLocation}>
-        {clusters.map((item) =>
+         {clusters.map((item) =>
           item.isCluster ? (
             <Marker
               key={`cluster-${item.id}`}
               coordinate={{ latitude: item.latitude, longitude: item.longitude }}
+              zIndex={999}
               onPress={() => {
                 mapRef.current?.animateToRegion({
                   ...region,
@@ -71,10 +74,20 @@ const Map = ({ isShowMap, organizationsList }: MapProps) => {
               latitude={item.latitude}
               longitude={item.longitude}
               selectedMarkerId={selectedMarkerId}
-              onSelect={() => setSelectedMarkerId(item.id)}
+              onSelect={() => {
+                setSelectedMarkerId(item.id);
+                setSelectedOrganization(item);
+              }}
             />
           )
-        )}
+         )}
+        <OrganizationInfoModal
+          organization={selectedOrganization}
+          onClose={() => {
+            setSelectedMarkerId(null);
+            setSelectedOrganization(null);
+          }}
+        />
       </MapView>
     </View>
   );
